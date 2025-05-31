@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      .moveToTop {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dummy">0</div>
+    <button class="moveToTop" type="button">上に戻る</button>
+    <script>
+      const dummyContent = document.querySelector('.dummy');
+      for(let i = 0; i < 1000; i++ ){
+        dummyContent.textContent += `テキスt ${i}`;
+      }
+
+      //「ブラウザのウィンドウ（ユーザーが見ているページ）」を監視して、スクロールされたら関数を実行してね」という命令
+      window.addEventListener('scroll', function(){
+        const button = document.querySelector('.moveToTop');
+        //ページを縦方向にどれだけスクロールしたか
+        //.style.display は CSSの display プロパティをJavaScriptで操作している部分
+        if (window.scrollY >= 200) {
+          //blockはブロック要素とした表示する
+          //noneは表示しない
+          button.style.display = 'block';
+        }else{
+          button.style.display= 'none';
+        }
+        });
+
+        const button = document.querySelector('.moveToTop');
+        button.addEventListener('click', function(){
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+    </script>
+  </body>
+</html>
